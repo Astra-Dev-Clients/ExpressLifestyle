@@ -468,12 +468,14 @@
 }
   
 .pagination a.active {
-    background-color: var(--bs-primary);
+    background-color: var(--bs-dark);
     color: var(--bs-light);
     border: 1px solid var(--bs-secondary);
 }
   
-.pagination a:hover:not(.active) {background-color: var(--bs-primary)}
+.pagination a:hover:not(.active) {background-color: var(--bs-dark);
+color:white;
+}
 
 .nav.nav-tabs .nav-link.active {
     border-bottom: 2px solid var(--bs-secondary) !important;
