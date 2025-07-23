@@ -11,6 +11,137 @@
     };
     spinner(0);
 
+    // Initialize buttons
+    $(document).ready(function() {
+        // Search functionality
+        $('.btn-search').click(function(e) {
+            e.preventDefault();
+            $('#searchModal').modal('show');
+        });
+
+        // Search form submission
+        $('.modal-body input[type="search"]').on('keypress', function(e) {
+            if (e.which === 13) { // Enter key pressed
+                e.preventDefault();
+                var searchTerm = $(this).val().trim();
+                if (searchTerm) {
+                    searchProducts(searchTerm);
+                }
+            }
+        });
+
+        // Search icon click
+        $('#search-icon-1').click(function(e) {
+            e.preventDefault();
+            var searchTerm = $('.modal-body input[type="search"]').val().trim();
+            if (searchTerm) {
+                searchProducts(searchTerm);
+            }
+        });
+
+        // Cart button
+        $('.fa-shopping-cart').parent().click(function(e) {
+            e.preventDefault();
+            window.location.href = 'cart.html';
+        });
+
+        // User button
+        $('.fa-user').parent().click(function(e) {
+            e.preventDefault();
+            window.location.href = 'login.html';
+        });
+
+        // Navigation links
+        $('.nav-item a').click(function(e) {
+            e.preventDefault();
+            var href = $(this).attr('href');
+            if (href) {
+                window.location.href = href;
+            }
+        });
+
+        // Product buttons
+        $('.fruite-item').click(function() {
+            var productId = $(this).data('product-id');
+            if (productId) {
+                window.location.href = 'shop-detail.html?id=' + productId;
+            }
+        });
+
+        // Add to cart buttons
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault();
+            var productId = $(this).data('product-id');
+            if (productId) {
+                addToCart(productId);
+                updateCartCount();
+            }
+        });
+
+        // Quick view buttons
+        $('.quick-view').click(function(e) {
+            e.preventDefault();
+            var productId = $(this).data('product-id');
+            if (productId) {
+                openQuickView(productId);
+            }
+        });
+    });
+
+    // Function to add product to cart
+    function addToCart(productId) {
+        // Here you would typically make an API call to add to cart
+        console.log('Adding product ' + productId + ' to cart');
+    }
+
+    // Function to update cart count
+    function updateCartCount() {
+        var currentCount = parseInt($('.cart-count').text()) || 0;
+        $('.cart-count').text(currentCount + 1);
+    }
+
+    // Function to open quick view
+    function openQuickView(productId) {
+        // Here you would typically load product details and show a modal
+        console.log('Opening quick view for product ' + productId);
+    }
+
+    // Function to search products
+    function searchProducts(term) {
+        // Close the modal
+        $('#searchModal').modal('hide');
+        
+        // Here you would typically make an API call to search products
+        // For now, we'll just log the search term
+        console.log('Searching for: ' + term);
+        
+        // You can implement the actual search functionality here
+        // For example:
+        // 1. Make an API call to your backend
+        // 2. Update the product grid with search results
+        // 3. Show a message if no results found
+        
+        // Example of how you might implement it:
+        // $.ajax({
+        //     url: '/api/search',
+        //     method: 'GET',
+        //     data: { term: term },
+        //     success: function(results) {
+        //         // Update the product grid with results
+        //     }
+        // });
+    }
+
+    // Spinner
+    var spinner = function () {
+        setTimeout(function () {
+            if ($('#spinner').length > 0) {
+                $('#spinner').removeClass('show');
+            }
+        }, 1);
+    };
+    spinner(0);
+
 
     // Fixed Navbar
     $(window).scroll(function () {
